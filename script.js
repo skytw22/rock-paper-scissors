@@ -37,26 +37,26 @@ function getComputerChoice() {
 function game() {
     let playerScore = 0;
     let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
+    
         let player = prompt("Rock, paper, scissors?");
         let playerSelection = player.toUpperCase();
-        if (playerSelection != null && (playerSelection == "ROCK" || playerSelection == "PAPER" || playerSelection == "SCISSORS")) {
-            let result = playRound(playerSelection,getComputerChoice());
-            if (result.slice(4,5) == "w") {
-                playerScore++;
-                console.log(result);
-            } else if (result.slice(4,5) == "l") {
-                computerScore++;
-                console.log(result);
+            if (playerSelection != null && (playerSelection == "ROCK" || playerSelection == "PAPER" || playerSelection == "SCISSORS")) {
+                let result = playRound(playerSelection,getComputerChoice());
+                if (result.slice(4,5) == "w") {
+                    playerScore++;
+                    console.log(result);
+                } else if (result.slice(4,5) == "l") {
+                    computerScore++;
+                    console.log(result);
+                } else {
+                    playerScore + 0;
+                    computerScore + 0;
+                    console.log(result);
+                }
             } else {
-                playerScore + 0;
-                computerScore + 0;
-                console.log(result);
+                console.log("Invalid input! Wasted a round!");
             }
-        } else {
-            console.log("Invalid input! Wasted a round!");
-        }
-     }
+     
     if (playerScore > computerScore) {
         return "You are the winner!";
     } else if (playerScore < computerScore) {

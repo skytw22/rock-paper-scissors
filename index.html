@@ -5,9 +5,108 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors!</title>
-    <script src="./script.js"></script>
+   <!-- <script src="./script.js"></script> -->
 </head>
 <body>
-    
+    <p>Rock, paper, scissors?</p>
+
+    <div class="buttons">
+        <button class="ROCK">Rock</button>
+        <button class="PAPER">Paper</button>
+        <button class="SCISSORS">Scissors</button>
+    </div>
+    <div class="playerselection"></div>
+    <div class="result"></div>
+    <div class="player_score"></div>
+    <div class="computer_score"></div>
+    <div class="winner"></div>
+
+
+<script>
+    function checkWinner (player_Score, computer_Score) {
+        if (player_Score == 5) {
+            winner.textContent = 'You are the winner!';
+            playerScore = 0;
+            computerScore = 0;
+        } else if (computer_Score == 5) {
+            winner.textContent ='Computer is the winner!';
+            playerScore = 0;
+            computerScore = 0;
+        } else {
+            winner.textContent ='game continues...';
+        }
+    }
+
+    function getComputerChoice() {
+        let n = Math.floor(Math.random() * 3); // n can be 0,1,2
+        if (n==0) {
+            return "ROCK";
+        } else if (n==1) {
+            return "PAPER"; 
+        } else {
+            return "SCISSORS";
+        }
+    }
+
+ function playRound(playerSelection, computerSelection) {
+    if (playerSelection == computerSelection) {
+        return "It's a tie!";
+    } else if (playerSelection == "ROCK") {
+        if (computerSelection == "PAPER") {
+            return "You lose! Paper beats rock!";
+        } else {
+            return "You win! Rock beats scissors!";
+        }
+    } else if (playerSelection == "PAPER") {
+        if (computerSelection == "ROCK") {
+            return "You win! Paper beats rock!";
+        } else {
+            return "You lose! Scissors beats paper!";
+        }
+    } else {
+        if (computerSelection == "ROCK") {
+            return "You lose! Rock beats scissors!";
+        } else {
+            return "You win! Scissors beats paper!";
+        }
+    }
+  }
+
+  function addRoundScore(round){
+    if (round.slice(4,5) == "w") {
+            playerScore++;
+        } else if (round.slice(4,5) == "l") {
+            computerScore++;
+        } else {
+            playerScore + 0;
+            computerScore + 0;
+        }
+  }
+
+    const buttons = document.querySelectorAll('button');
+    const playerselection = document.querySelector('div.playerselection');
+    const roundResult = document.querySelector('div.result');
+    const winner = document.querySelector('div.winner');
+    const player = document.querySelector('div.player_score');
+    const computer = document.querySelector('div.computer_score');
+
+    let playerScore = 0;
+    let computerScore = 0;
+
+    buttons.forEach((button) => button.addEventListener('click', function(e){
+        playerselection.textContent = `You picked ${e.target.classList.value}!`; //display player selection
+        let round_result = playRound(e.target.classList.value, getComputerChoice());
+        roundResult.textContent = round_result; //display round result
+
+        addRoundScore(round_result);//calculate round scores
+
+        player.textContent = `Your score is now: ${playerScore}`; //display current player score
+        computer.textContent = `Computer score is now: ${computerScore}`; //display current computer score
+
+        checkWinner(playerScore, computerScore);//check if there's winner
+    }
+    ));
+
+</script>
 </body>
 </html>
